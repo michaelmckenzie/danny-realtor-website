@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Improvement Plan — Haygood Real Estate</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f8f6f2; color: #1a1a1a; padding: 48px 24px; max-width: 780px; margin: 0 auto; line-height: 1.6; }
+  header { border-bottom: 3px solid #b8976a; padding-bottom: 24px; margin-bottom: 40px; }
+  header h1 { font-size: 28px; font-weight: normal; letter-spacing: 0.03em; color: #1a1a1a; }
+  header p { margin-top: 8px; color: #666; font-size: 15px; font-style: italic; }
+  .priority-group { margin-bottom: 40px; }
+  .priority-label { font-family: 'Arial', sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: #b8976a; margin-bottom: 16px; }
+  .item { background: #fff; border: 1px solid #e0d9ce; border-left: 4px solid #b8976a; border-radius: 4px; padding: 24px 28px; margin-bottom: 16px; }
+  .item.medium { border-left-color: #8aaa7a; }
+  .item.low { border-left-color: #a0b4c8; }
+  .item-number { font-family: 'Arial', sans-serif; font-size: 12px; font-weight: bold; color: #b8976a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .item.medium .item-number { color: #6a8a5a; }
+  .item.low .item-number { color: #6080a0; }
+  .item h2 { font-size: 18px; font-weight: normal; margin-bottom: 10px; color: #1a1a1a; }
+  .problem { font-size: 14px; color: #555; margin-bottom: 12px; padding-left: 12px; border-left: 2px solid #e0d9ce; }
+  .solution { font-size: 15px; color: #1a1a1a; background: #faf8f5; border-radius: 3px; padding: 12px 14px; }
+  .solution strong { color: #b8976a; display: block; font-size: 12px; font-family: 'Arial', sans-serif; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 4px; }
+  .item.medium .solution strong { color: #6a8a5a; }
+  .item.low .solution strong { color: #6080a0; }
+  .needs-client { display: inline-block; margin-top: 10px; font-size: 12px; font-family: 'Arial', sans-serif; background: #fff5e6; border: 1px solid #e8c88a; color: #a07030; padding: 3px 10px; border-radius: 12px; }
+  footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #e0d9ce; font-size: 13px; color: #999; font-style: italic; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Website Improvement Plan</h1>
+  <p>Haygood Real Estate &nbsp;·&nbsp; Prepared June 2026</p>
+</header>
+<div class="priority-group">
+  <div class="priority-label">High Priority</div>
+  <div class="item">
+    <div class="item-number">Issue 01 &nbsp;·&nbsp; High Priority</div>
+    <h2>Portfolio Gallery Is Empty</h2>
+    <div class="problem">The Portfolio section loads with the heading "Tap any image to enlarge" but contains no property images — visitors see a blank space where listings should appear.</div>
+    <div class="solution"><strong>Solution</strong>We'll build out a full image gallery with property photos. You provide the listing images (or we source approved stock photography as placeholders), and we'll lay them out in the existing grid with lightbox enlargement already wired up and ready to go.</div>
+    <span class="needs-client">Needs from Daniel: property photos</span>
+  </div>
+  <div class="item">
+    <div class="item-number">Issue 02 &nbsp;·&nbsp; High Priority</div>
+    <h2>Placeholder Testimonials Visible to Visitors</h2>
+    <div class="problem">The Testimonials section currently shows template text — "A genuine client testimonial goes here" and "— Client name, City" — on the live site, visible to every visitor right now.</div>
+    <div class="solution"><strong>Solution</strong>We'll replace the placeholder copy with real client reviews the moment Daniel provides them. The section is already designed and styled — it's a one-hour fix once we have 2–3 testimonials.</div>
+    <span class="needs-client">Needs from Daniel: 2–3 real client testimonials</span>
+  </div>
+  <div class="item">
+    <div class="item-number">Issue 03 &nbsp;·&nbsp; High Priority</div>
+    <h2>Contact Form Doesn't Capture Leads</h2>
+    <div class="problem">When a visitor submits the contact form, they receive a message stating it's a demo and that no message was sent. Leads are currently being lost.</div>
+    <div class="solution"><strong>Solution</strong>We'll connect the form to a real email delivery service (Formspree) so every submission goes directly to Daniel's inbox. Setup takes under an hour and requires only the email address where leads should arrive.</div>
+    <span class="needs-client">Needs from Daniel: preferred email address for leads</span>
+  </div>
+</div>
+<div class="priority-group">
+  <div class="priority-label">Medium Priority</div>
+  <div class="item medium">
+    <div class="item-number">Issue 04 &nbsp;·&nbsp; Medium Priority</div>
+    <h2>Agent Headshot Is Missing from About Section</h2>
+    <div class="problem">The About section is designed with a two-column layout — photo on the left, bio on the right — but no photo has been added. The bio column sits alone, leaving the section looking unfinished.</div>
+    <div class="solution"><strong>Solution</strong>We'll drop Daniel's professional headshot into the existing photo slot. The layout is already built for it — we just need the image. If he doesn't have a professional photo, we can temporarily style the section to a single-column layout until one is available.</div>
+    <span class="needs-client">Needs from Daniel: professional headshot photo</span>
+  </div>
+</div>
+<div class="priority-group">
+  <div class="priority-label">Low Priority</div>
+  <div class="item low">
+    <div class="item-number">Issue 05 &nbsp;·&nbsp; Low Priority</div>
+    <h2>LinkedIn Not Linked</h2>
+    <div class="problem">No LinkedIn link exists anywhere on the site. For a real estate professional, LinkedIn provides credibility and an additional trust signal for potential clients.</div>
+    <div class="solution"><strong>Solution</strong>We'll add a LinkedIn icon/link alongside the existing social links. Takes minutes once we have his LinkedIn profile URL.</div>
+    <span class="needs-client">Needs from Daniel: LinkedIn profile URL</span>
+  </div>
+  <div class="item low">
+    <div class="item-number">Issue 06 &nbsp;·&nbsp; Low Priority</div>
+    <h2>Footer Missing "Process" Navigation Link</h2>
+    <div class="problem">The top navigation has 5 links: About, Portfolio, Approach, Process, and Contact. The footer's navigation only has 4 — the "Process" section is missing.</div>
+    <div class="solution"><strong>Solution</strong>A quick one-line code fix to add the missing Process link to the footer nav. No content changes needed — just a copy of what's already in the header.</div>
+  </div>
+</div>
+<footer>Items marked "Needs from Daniel" require client-provided content before work can begin. All other fixes can be completed immediately.</footer>
+</body>
+</html>
