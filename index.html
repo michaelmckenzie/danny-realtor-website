@@ -357,17 +357,18 @@
         <div class="contact-line"><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/haygoodrealestate?utm_source=qr" target="_blank" rel="noopener noreferrer">@haygoodrealestate</a></div>
       </div>
       <div class="reveal" data-d="1">
-        <form id="leadform" novalidate>
+        <form id="leadform" action="contact.php" method="post" novalidate>
           <div class="row">
-            <div><label for="fn">First name</label><input id="fn" type="text" autocomplete="given-name" /></div>
-            <div><label for="ln">Last name</label><input id="ln" type="text" autocomplete="family-name" /></div>
+            <div><label for="fn">First name</label><input id="fn" name="first_name" type="text" autocomplete="given-name" /></div>
+            <div><label for="ln">Last name</label><input id="ln" name="last_name" type="text" autocomplete="family-name" /></div>
           </div>
-          <label for="em">Email</label><input id="em" type="email" autocomplete="email" />
-          <label for="ph">Phone</label><input id="ph" type="tel" autocomplete="tel" />
+          <label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email" />
+          <label for="ph">Phone</label><input id="ph" name="phone" type="tel" autocomplete="tel" />
           <label for="goal">I'm looking to</label>
-          <select id="goal"><option>Buy a home</option><option>Sell a home</option><option>Invest / analyze a deal</option><option>Explore financing options</option><option>Just exploring</option></select>
+          <select id="goal" name="goal"><option>Buy a home</option><option>Sell a home</option><option>Invest / analyze a deal</option><option>Explore financing options</option><option>Just exploring</option></select>
           <label for="msg">A little about what you need</label>
-          <textarea id="msg"></textarea>
+          <textarea id="msg" name="message"></textarea>
+          <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
           <button type="submit" class="btn solid">Send message</button>
           <p id="formnote" style="font-size:.78rem;color:var(--bone-dim);margin-top:14px"></p>
         </form>
@@ -461,7 +462,25 @@
   }
 
   var form=document.getElementById('leadform');
-  if(form){ form.addEventListener('submit', function(e){ e.preventDefault(); var note=document.getElementById('formnote'); var em=document.getElementById('em').value.trim(); if(!em){ note.style.color='#E6B36A'; note.textContent='Add your email so I can reply.'; return; } note.style.color='#7C9A92'; note.textContent='Thanks — this form is a front-end demo. Connect it to your email or a service like Formspree to receive real messages.'; form.reset(); }); }
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var note=document.getElementById('formnote');
+      var btn=form.querySelector('button[type="submit"]');
+      var em=(document.getElementById('em').value||'').trim();
+      if(!em){ note.style.color='#E6B36A'; note.textContent='Add your email so Daniel can reply.'; return; }
+      note.style.color='#7C9A92'; note.textContent='Sending…';
+      if(btn){ btn.disabled=true; }
+      fetch('contact.php',{ method:'POST', headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}, body:new FormData(form) })
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if(d&&d.ok){ note.style.color='#7C9A92'; note.textContent=d.message||'Thanks — your message is on its way.'; form.reset(); }
+          else { note.style.color='#E6B36A'; note.textContent=(d&&d.message)||'Something went wrong. Please try again or email haygooddaniel@gmail.com.'; }
+        })
+        .catch(function(){ note.style.color='#E6B36A'; note.textContent='Network error — please try again, or email haygooddaniel@gmail.com directly.'; })
+        .finally(function(){ if(btn){ btn.disabled=false; } });
+    });
+  }
 
   window.lb=function(el){ var img=el.querySelector('img'); var L=document.getElementById('lightbox'); document.getElementById('lbimg').src=img.src; L.classList.add('on'); };
   window.closeLb=function(e){ document.getElementById('lightbox').classList.remove('on'); };
