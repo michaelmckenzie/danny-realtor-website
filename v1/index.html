@@ -516,5 +516,25 @@
   }
 })();
 </script>
+<script>
+(function(){
+  var v='a', start=Date.now();
+  function track(event,extra){
+    var body='event='+event+'&v='+v+(extra?'&'+extra:'');
+    if(navigator.sendBeacon){navigator.sendBeacon('/track.php',body);}
+    else{var x=new XMLHttpRequest();x.open('POST','/track.php',true);x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');x.send(body);}
+  }
+  track('pageview');
+  document.querySelectorAll('a[href^="tel:"],a[href^="mailto:"]').forEach(function(el){
+    el.addEventListener('click',function(){track('contact');});
+  });
+  var f=document.getElementById('leadform');
+  if(f){f.addEventListener('submit',function(){track('contact');});}
+  window.addEventListener('beforeunload',function(){
+    var secs=Math.round((Date.now()-start)/1000);
+    track('exit','time='+secs);
+  });
+})();
+</script>
 </body>
 </html>

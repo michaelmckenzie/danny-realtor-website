@@ -1,0 +1,56 @@
+# danny-zillow-site/.htaccess — Apache shared hosting config
+
+Options -Indexes
+Options -MultiViews
+
+# ─── HTTPS redirect (uncomment when SSL is active) ────────────────────────
+#RewriteEngine On
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ─── Pretty URLs (optional — pages work without this too) ─────────────────
+#RewriteEngine On
+#RewriteBase /
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^listing/([0-9]+)$ /property.php?id=$1 [L,QSA]
+
+# ─── Security headers ─────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ─── Block direct access to sensitive directories ─────────────────────────
+<FilesMatch "(config\.php|\.env|composer\.json|composer\.lock|setup\.sql)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# ─── Block PHP execution in uploads folder ────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^uploads/.*\.(php|php3|php4|php5|phtml|pl|py|jsp|asp)$ - [F,NC]
+</IfModule>
+
+# ─── PHP settings (if host allows .htaccess overrides) ────────────────────
+<IfModule mod_php.c>
+  php_flag display_errors Off
+  php_value upload_max_filesize 10M
+  php_value post_max_size 12M
+  php_value max_execution_time 60
+  php_value session.cookie_httponly 1
+</IfModule>
+
+# ─── Caching for static assets ────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg  "access plus 30 days"
+  ExpiresByType image/png   "access plus 30 days"
+  ExpiresByType image/webp  "access plus 30 days"
+  ExpiresByType text/css    "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>

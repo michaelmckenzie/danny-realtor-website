@@ -11,10 +11,49 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Generate v2/config.php from secrets
+        run: |
+          php -r "echo password_hash('${{ secrets.V2_ADMIN_PASSWORD }}', PASSWORD_DEFAULT);" > /tmp/pw_hash.txt
+          HASH=$(cat /tmp/pw_hash.txt)
+          cat > v2/config.php << PHPEOF
+          <?php
+          define('DB_HOST',    '${{ secrets.V2_DB_HOST }}');
+          define('DB_NAME',    '${{ secrets.V2_DB_NAME }}');
+          define('DB_USER',    '${{ secrets.V2_DB_USER }}');
+          define('DB_PASS',    '${{ secrets.V2_DB_PASS }}');
+          define('DB_CHARSET', 'utf8mb4');
+          define('SITE_NAME',  "Danny's Real Estate");
+          define('SITE_URL',   'https://danielhernandezhaygood.com/v2');
+          define('AGENT_NAME', 'Danny Hernandez Haygood');
+          define('AGENT_PHONE','(210) 740-8692');
+          define('AGENT_EMAIL','haygooddaniel@gmail.com');
+          define('ADMIN_USERNAME',      'danny');
+          define('ADMIN_PASSWORD_HASH', '${HASH}');
+          define('UPLOAD_DIR',      __DIR__ . '/uploads/properties/');
+          define('UPLOAD_URL',      '/v2/uploads/properties/');
+          define('MAX_UPLOAD_SIZE', 5 * 1024 * 1024);
+          define('ALLOWED_TYPES',   ['image/jpeg', 'image/png', 'image/webp']);
+          define('ALLOWED_EXT',     ['jpg', 'jpeg', 'png', 'webp']);
+          define('MAX_PHOTOS',      20);
+          define('MLS_ENABLED',       false);
+          define('MLS_PROVIDER',      'reso');
+          define('MLS_ENDPOINT',      '');
+          define('MLS_API_KEY',       '');
+          define('MLS_CLIENT_ID',     '');
+          define('MLS_CLIENT_SECRET', '');
+          define('MLS_TOKEN_URL',     '');
+          define('MLS_SYNC_INTERVAL', 3600);
+          PHPEOF
+
+      - name: Generate stats password file
+        run: |
+          mkdir -p ab_logs
+          echo "<?php return '${{ secrets.STATS_PASSWORD }}';" > ab_logs/stats_password.php
+
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete --exclude='.git*' --exclude='.github'
+          switches: -avzr --delete --exclude='.git*' --exclude='.github' --exclude='v2/config.php.example'
           path: ./
           remote_path: /home/u851634631/domains/danielhernandezhaygood.com/public_html/
           remote_host: 82.180.174.23

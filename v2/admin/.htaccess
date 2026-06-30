@@ -1,0 +1,11 @@
+# admin/.htaccess — Extra protection for the admin directory
+
+Options -Indexes
+
+# ─── Optional: restrict by IP address ────────────────────────────────────
+# Uncomment and change to your IP to add IP-based protection on top of the
+# password login. Find your IP at https://whatismyip.com
+#
+#Order Deny,Allow
+#Deny from all
+#Allow from 123.456.789.000   # ← replace with your home/office IP

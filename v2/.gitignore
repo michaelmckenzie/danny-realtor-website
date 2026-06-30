@@ -1,0 +1,26 @@
+# Sensitive config — copy config.php.example and fill in credentials
+config.php
+
+# Uploaded property photos (don't commit user content)
+uploads/properties/*.jpg
+uploads/properties/*.jpeg
+uploads/properties/*.png
+uploads/properties/*.webp
+
+# Composer vendor directory
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# PHP error logs
+*.log
+error_log

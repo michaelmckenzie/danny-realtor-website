@@ -1,0 +1,43 @@
+<?php
+/**
+ * config.php.example
+ * Copy this file to config.php and fill in your real credentials.
+ * NEVER commit config.php — it is in .gitignore.
+ */
+
+// ─── Database ──────────────────────────────────────────────────────────────
+define('DB_HOST',    'localhost');
+define('DB_NAME',    'danny_realestate');
+define('DB_USER',    'YOUR_DB_USER');
+define('DB_PASS',    'YOUR_DB_PASSWORD');
+define('DB_CHARSET', 'utf8mb4');
+
+// ─── Site ──────────────────────────────────────────────────────────────────
+define('SITE_NAME',  "Danny's Real Estate");
+define('SITE_URL',   'https://yourdomain.com');
+define('AGENT_NAME', 'Danny');
+define('AGENT_PHONE','(555) 123-4567');
+define('AGENT_EMAIL','danny@yourdomain.com');
+
+// ─── Admin credentials ─────────────────────────────────────────────────────
+// Generate a hash:  php -r "echo password_hash('your_password', PASSWORD_DEFAULT);"
+define('ADMIN_USERNAME',      'danny');
+define('ADMIN_PASSWORD_HASH', '$2y$12$REPLACE_THIS_WITH_YOUR_BCRYPT_HASH');
+
+// ─── File uploads ──────────────────────────────────────────────────────────
+define('UPLOAD_DIR',      __DIR__ . '/uploads/properties/');
+define('UPLOAD_URL',      '/uploads/properties/');
+define('MAX_UPLOAD_SIZE', 5 * 1024 * 1024);
+define('ALLOWED_TYPES',   ['image/jpeg', 'image/png', 'image/webp']);
+define('ALLOWED_EXT',     ['jpg', 'jpeg', 'png', 'webp']);
+define('MAX_PHOTOS',      20);
+
+// ─── MLS / IDX (fill in when ready — see mls/README.md) ───────────────────
+define('MLS_ENABLED',       false);
+define('MLS_PROVIDER',      'reso');
+define('MLS_ENDPOINT',      '');
+define('MLS_API_KEY',       '');
+define('MLS_CLIENT_ID',     '');
+define('MLS_CLIENT_SECRET', '');
+define('MLS_TOKEN_URL',     '');
+define('MLS_SYNC_INTERVAL', 3600);
