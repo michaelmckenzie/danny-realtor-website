@@ -63,6 +63,7 @@
     var body='event='+event+'&v='+v+(extra?'&'+extra:'');
     if(navigator.sendBeacon){navigator.sendBeacon('/track.php',body);}
     else{var x=new XMLHttpRequest();x.open('POST','/track.php',true);x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');x.send(body);}
+    if(window.gtag){gtag('event','ab_'+event,{'ab_version':'v2'});}
   }
   track('pageview');
   document.querySelectorAll('a[href^="tel:"],a[href^="mailto:"]').forEach(function(el){
