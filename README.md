@@ -1,6 +1,6 @@
 # Danny Realtor Website
 
-Real estate website for Danny McKenzie.
+Real estate website for Danny Haygood.
 
 ## Setup
 
